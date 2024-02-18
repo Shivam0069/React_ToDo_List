@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function TodoForm({ setItem, items }) {
+export default function TodoForm({ setItem, items, setFilter }) {
   const inputRef = useRef();
 
   function submitHandler() {
@@ -32,6 +32,7 @@ export default function TodoForm({ setItem, items }) {
 
     inputRef.current.value = "";
     toast.success("New task added successfully");
+    setFilter("all");
   }
   return (
     <div className="max-w-sm mx-auto sm:max-w-md  sm:ml-10 pt-10">

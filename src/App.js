@@ -52,7 +52,7 @@ function App() {
         }}
         className="w-screen h-screen  "
       >
-        <TodoForm setItem={setItems} items={items} />
+        <TodoForm setItem={setItems} items={items} setFilter={setFilter} />
         <div className="my-4 sm:ml-10  w-full text-center sm:w-fit sm:text-left   ">
           <select
             id="filter"
@@ -60,7 +60,9 @@ function App() {
             onChange={handleFilterChange}
             className="p-2 rounded-md"
           >
-            <option value="all">All</option>
+            <option value="all" selected>
+              All
+            </option>
             <option value="completed">Completed</option>
             <option value="pending">Pending</option>
           </select>

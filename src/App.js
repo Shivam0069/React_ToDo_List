@@ -4,11 +4,28 @@ import TodoItems from "./components/TodoItems";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  const [items, setItem] = useState(null);
+  const [items, setItems] = useState([]);
+  const [displayedItems, setDisplayedItems] = useState([]);
+  const [filter, setFilter] = useState("all");
+
   useEffect(() => {
     const existingItems = JSON.parse(localStorage.getItem("ToDoItems")) || [];
-    setItem(existingItems);
+    setItems(existingItems);
+    setDisplayedItems(existingItems);
   }, []);
+
+  useEffect(() => {
+    if (filter === "completed") {
+      setDisplayedItems(items.filter((item) => item.status === "completed"));
+    } else if (filter === "pending") {
+      setDisplayedItems(items.filter((item) => item.status === "pending"));
+    } else {
+      setDisplayedItems(items);
+    }
+  }, [items, filter]);
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
   return (
     <>
       <div>
@@ -22,7 +39,6 @@ function App() {
               duration: 800,
             },
             error: {
-             
               duration: 800,
             },
           }}
@@ -36,8 +52,20 @@ function App() {
         }}
         className="w-screen h-screen  "
       >
-        <TodoForm setItem={setItem} items={items} />
-        <TodoItems setItem={setItem} items={items} />
+        <TodoForm setItem={setItems} items={items} />
+        <div className="my-4 sm:ml-10  w-full text-center sm:w-fit sm:text-left   ">
+          <select
+            id="filter"
+            value={filter}
+            onChange={handleFilterChange}
+            className="p-2 rounded-md"
+          >
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+        <TodoItems setItem={setItems} items={displayedItems} />
       </div>
     </>
   );

@@ -26,7 +26,7 @@ export default function Item({ item, items, setItem }) {
   }
   return (
     <div className="border shadow-lg p-4 rounded-md  ">
-      <div className="text-lg font-semibold text-center">{item.title}</div>
+      <div className="text-lg font-semibold text-center capitalize">{item.title}</div>
       <div className="flex justify-between items-center mt-2">
         <button
           className={`px-3 py-1 rounded text-sm ${

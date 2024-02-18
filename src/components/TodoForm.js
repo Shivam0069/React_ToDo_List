@@ -34,7 +34,7 @@ export default function TodoForm({ setItem, items }) {
     toast.success("New task added successfully");
   }
   return (
-    <div className="max-w-md  sm:ml-10 pt-10">
+    <div className="max-w-sm mx-auto sm:max-w-md  sm:ml-10 pt-10">
       <input
         ref={inputRef}
         type="text"
